@@ -20,12 +20,10 @@ app.get("/weather", async (req, res) => {
   const city = req.query.q;
 
   if (!city) {
-    return res
-      .status(400)
-      .render("index", {
-        weather: null,
-        errorMessage: "Veuillez fournir une ville.",
-      });
+    return res.status(400).render("index", {
+      weather: null,
+      errorMessage: "Veuillez fournir une ville.",
+    });
   }
 
   try {
@@ -67,3 +65,5 @@ app.get("/weather", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Serveur en cours d'exécution sur http://localhost:${PORT}`);
 });
+
+module.exports = app;
