@@ -3,7 +3,6 @@ const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 const API_KEY = process.env.WEATHER_API_KEY;
 
 // Middleware pour gérer les requêtes JSON
@@ -20,12 +19,10 @@ app.get("/weather", async (req, res) => {
   const city = req.query.q;
 
   if (!city) {
-    return res
-      .status(400)
-      .render("index", {
-        weather: null,
-        errorMessage: "Veuillez fournir une ville.",
-      });
+    return res.status(400).render("index", {
+      weather: null,
+      errorMessage: "Veuillez fournir une ville.",
+    });
   }
 
   try {
@@ -66,9 +63,12 @@ app.get("/weather", async (req, res) => {
   }
 });
 
-// Démarrer le serveur
-app.listen(PORT, () => {
-  console.log(`Serveur en cours d'exécution sur http://localhost:${PORT}`);
-});
-
 module.exports = app;
+
+// Lancer le serveur seulement si ce fichier est exécuté directement
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Serveur en cours d'exécution sur http://localhost:${PORT}`);
+  });
+}

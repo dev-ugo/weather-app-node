@@ -1,6 +1,15 @@
 const request = require("supertest");
 const app = require("../server"); // Assure-toi que ton fichier Express exporte l'app
 const axios = require("axios");
+let server;
+
+beforeAll(() => {
+  server = app.listen(3001, () => console.log("Test server running on 3001"));
+});
+
+afterAll(() => {
+  server.close();
+});
 
 // Mock Axios pour simuler des erreurs
 jest.mock("axios");

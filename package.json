@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest tests/app.test.js",
+    "test": "jest --detectOpenHandles tests/app.test.js",
     "start": "nodemon server.js"
   },
   "keywords": [],
