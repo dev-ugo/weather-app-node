@@ -20,10 +20,12 @@ app.get("/weather", async (req, res) => {
   const city = req.query.q;
 
   if (!city) {
-    return res.status(400).render("index", {
-      weather: null,
-      errorMessage: "Veuillez fournir une ville.",
-    });
+    return res
+      .status(400)
+      .render("index", {
+        weather: null,
+        errorMessage: "Veuillez fournir une ville.",
+      });
   }
 
   try {
@@ -40,24 +42,27 @@ app.get("/weather", async (req, res) => {
 
     const data = response.data;
 
-    // Si tout va bien, on envoie les données à la vue
     res.render("index", {
       weather: {
         city: data.name,
-        temperature: Math.round(data.main.temp), // On arrondit la température
+        temperature: Math.round(data.main.temp),
         description: data.weather[0].description,
         icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
       },
-      errorMessage: null, // Pas d'erreur, on définit errorMessage à null
+      errorMessage: null,
     });
   } catch (error) {
     if (error.response && error.response.status === 404) {
-      return res.render("index", {
-        weather: null,
-        errorMessage: "Ville non trouvée.",
-      });
+      // Gestion d'une ville introuvable
+      return res
+        .status(404)
+        .render("index", { weather: null, errorMessage: "Ville non trouvée." });
     }
-    res.render("index", { weather: null, errorMessage: "Erreur serveur." });
+
+    // Gestion d'une erreur serveur/API
+    return res
+      .status(500)
+      .render("index", { weather: null, errorMessage: "Erreur serveur." });
   }
 });
 
