@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Météo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      input {
+        padding: 10px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .weather-result {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Météo en Direct</h1>
+    <form method="GET" action="/weather">
+      <input type="text" name="q" placeholder="Entrez une ville" required />
+      <button type="submit">Rechercher</button>
+    </form>
+
+    <% if (weather) { %>
+    <div class="weather-result">
+      <h2>Météo à <%= weather.city %></h2>
+      <p>Température : <%= weather.temperature %>°C</p>
+      <p>Description : <%= weather.description %></p>
+      <img src="<%= weather.icon %>" alt="Icône météo" />
+    </div>
+    <% } %>
+  </body>
+</html>
