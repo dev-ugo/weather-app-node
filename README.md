@@ -42,4 +42,4 @@ weather-app-node/
 
 ## Auteur
 
-**Preiswerk Ugo** - [Ton Profil GitHub](https://github.com/dev-ugo).  
+**Preiswerk Ugo** - [Profil GitHub](https://github.com/dev-ugo).  
